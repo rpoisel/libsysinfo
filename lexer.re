@@ -21,6 +21,8 @@ token_type_t scan(const char* pos, const char** cursor)
      '\000'                            { *cursor = pos; return TOKEN_END; }
      [ ]*":"[ ]*                       { *cursor = pos; return TOKEN_SEPARATOR; }
      [\n]                              { *cursor = pos; return TOKEN_NEWLINE; }
+     "Serial"                          { *cursor = pos; return TOKEN_SERIAL; }
+     'bogomips'                        { *cursor = pos; return TOKEN_BOGOMIPS; }
      [a-zA-Z0-9]+([ ][a-zA-Z0-9]+)*    { *cursor = pos; return TOKEN_KEY_OR_VALUE; }
      [^]                               { *cursor = pos; return TOKEN_ERROR; }
     */

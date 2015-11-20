@@ -9,7 +9,7 @@
 int main(void)
 {
     token_type_t token = TOKEN_UNDEFINED;
-    const char* to_parse = "asdf  :  qwer\n";
+    const char* to_parse = "asdf  :  qwer\nSerial : test\nBogoMIPS : 1";
     const char* pos = to_parse;
     const char* new_pos;
     char key_or_value[MAX_KEY_OR_VALUE_LEN] = { '\0' };
@@ -30,7 +30,14 @@ int main(void)
                 break;
             case TOKEN_KEY_OR_VALUE:
                 strncpy(key_or_value, pos, new_pos - pos);
+                key_or_value[new_pos - pos] = '\0';
                 printf("KEY_OR_VALUE: '%s'\n", key_or_value);
+                break;
+            case TOKEN_SERIAL:
+                printf("SERIAL\n");
+                break;
+            case TOKEN_BOGOMIPS:
+                printf("BOGOMIPS\n");
                 break;
             case TOKEN_ERROR:
                 printf("ERROR\n");
