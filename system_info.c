@@ -5,6 +5,7 @@
 #include "lexer.h"
 #include "system_info.h"
 
+#define INIT_N_A_STR "N/A"
 #define MAX_SUPPORTED_FILE_LEN 8192 /* support case that file is bigger than that! */
 #define MAX_KEY_OR_VALUE_LEN 1024
 
@@ -31,19 +32,15 @@ void parse_cpu_info(struct cpuinfo* info)
         switch (token)
         {
             case TOKEN_SERIAL:
-                printf("SERIAL\n");
                 last_field = token;
                 break;
             case TOKEN_BOGOMIPS:
-                printf("BOGOMIPS\n");
                 last_field = token;
                 break;
             case TOKEN_FLAGS:
-                printf("FLAGS\n");
                 last_field = token;
                 break;
             case TOKEN_KEY_OR_VALUE:
-                printf("KEY_OR_VALUE: '%s'\n", token_value);
                 switch (last_field)
                 {
                     case TOKEN_SERIAL:
@@ -61,23 +58,11 @@ void parse_cpu_info(struct cpuinfo* info)
                 last_field = TOKEN_UNDEFINED;
                 break;
             case TOKEN_ERROR:
-                printf("ERROR\n");
-                break;
             case TOKEN_END:
-                printf("END\n");
-                break;
             case TOKEN_SEPARATOR:
-                printf("SEPARATOR: '%s'\n", token_value);
-                break;
             case TOKEN_NEWLINE:
-                printf("NEWLINE\n");
-                break;
             case TOKEN_TAB:
-                printf("TAB\n");
-                break;
             case TOKEN_UNDEFINED:
-                printf("UNDEFINED: '%s'\n", token_value);
-                break;
             default:
                 break;
         }
@@ -87,7 +72,8 @@ void parse_cpu_info(struct cpuinfo* info)
 
 static void initialize_cpuinfo(struct cpuinfo* info)
 {
-    strncpy(info->serial, "N/A", MAX_VALUE_LEN);
-    strncpy(info->bogomips, "N/A", MAX_VALUE_LEN);
+    strncpy(info->serial, INIT_N_A_STR, MAX_VALUE_LEN);
+    strncpy(info->bogomips, INIT_N_A_STR, MAX_VALUE_LEN);
+    strncpy(info->flags, INIT_N_A_STR, MAX_FLAGS_LEN);
 }
 

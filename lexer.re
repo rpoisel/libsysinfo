@@ -5,6 +5,9 @@
 
 static void stripTokenValue(char* buf, const char* start, size_t token_len);
 
+/* Using re2c for lexing the cpuinfo file is a bit of an overkill
+ * however, I wanted to learn using it. Here we go! :-)
+ */
 token_type_t scan(const char* pos, const char** cursor,
         char* buf, size_t buflen)
 {
