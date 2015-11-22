@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.6)
-project (Tutorial C)
+project (libsysinfo C)
 
 include_directories(
     .
@@ -15,10 +15,10 @@ add_library(system_info STATIC
     system_info.c
     )
 
-add_executable(main
-    main.c
+add_executable(libsysinfo_test
+    libsysinfo_test.c
     )
 
-target_link_libraries(main
+target_link_libraries(libsysinfo_test
     system_info
     )
