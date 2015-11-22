@@ -10,8 +10,9 @@ add_custom_command(OUTPUT lexer.c
     MAIN_DEPENDENCY ${CMAKE_SOURCE_DIR}/lexer.re
     )
 
-add_library(lexer STATIC
-    lexer
+add_library(system_info STATIC
+    lexer.c
+    system_info.c
     )
 
 add_executable(main
@@ -19,5 +20,5 @@ add_executable(main
     )
 
 target_link_libraries(main
-    lexer
+    system_info
     )
